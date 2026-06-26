@@ -1,0 +1,55 @@
+# ============
+# Flutter / Dart
+# ============
+**/doc/api/
+.dart_tool/
+.pub/
+.pub-cache/
+build/
+coverage/
+.flutter-plugins
+.flutter-plugins-dependencies
+**/ios/Flutter/.last_build_id
+
+# Symbolication / Obfuscation
+app.*.symbols
+app.*.map.json
+
+# Android Studio
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# ============
+# IDE
+# ============
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# ============
+# OS
+# ============
+.DS_Store
+*.swp
+*.swo
+*~
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ============
+# Logs / Misc
+# ============
+*.log
+*.class
+*.pyc
+.history
+.svn/
+.swiftpm/
+.build/
+.buildlog/
+.atom/
+migrate_working_dir/
