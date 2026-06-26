@@ -5,7 +5,6 @@ import 'package:goldbill_calc/providers/shared_preferences_provider.dart';
 
 part 'cart_provider.g.dart';
 
-// Persistent gold rate notifier using Riverpod generator
 @Riverpod(keepAlive: true)
 class GoldRate extends _$GoldRate {
   static const _key = 'gold_rate';
@@ -36,7 +35,6 @@ class GoldRate extends _$GoldRate {
   }
 }
 
-// Persistent cart notifier using Riverpod generator
 @Riverpod(keepAlive: true)
 class Cart extends _$Cart {
   static const _key = 'gold_cart_items';

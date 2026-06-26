@@ -17,17 +17,15 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
   final _formKey = GlobalKey<FormState>();
 
   late TextEditingController _rateController;
-  // Form Field Controllers
-  final _netController = TextEditingController(); // Gold Weight (direct input)
-  final _stoneController = TextEditingController(); // Stone Weight (optional)
-  final _stoneRateController = TextEditingController(); // Stone Rate (optional)
+  final _netController = TextEditingController();
+  final _stoneController = TextEditingController();
+  final _stoneRateController = TextEditingController();
   final _wastageController = TextEditingController();
   final _makingChargeController = TextEditingController();
   final _qtyController = TextEditingController(text: '1');
 
   final purityIndex = {'18K': 0, '22K': 1, '24K': 2};
 
-  // Input states
   String _selectedType = 'Ring';
   String _selectedPurity = '22K';
   bool _isWastageInGrams = false;
@@ -183,7 +181,6 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
   @override
   void initState() {
     super.initState();
-    // Initialize the gold rate text field controller with the current provider state
     final rateList = ref.read(goldRateProvider);
     final currentRate = double.parse(rateList[1]);
     _rateController = TextEditingController(
@@ -197,7 +194,6 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
     final selectedIndex = purityIndex[_selectedPurity] ?? 1;
     final goldRate = double.parse(rateList[selectedIndex]);
     _rateController.text = goldRate.toStringAsFixed(0);
-    // Compute live preview calculations
     final double net = double.tryParse(_netController.text) ?? 0.0;
     final double stone = double.tryParse(_stoneController.text) ?? 0.0;
     final double stoneRate = double.tryParse(_stoneRateController.text) ?? 0.0;
@@ -235,7 +231,6 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
             const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-              //color: Colors.grey[100],
               child: Row(
                 children: [
                   Expanded(
@@ -252,7 +247,7 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
                           ),
                         ),
                         const Text(
-                          "Rate per gram (₹)",
+                          "Rate per gram (â‚¹)",
                           style: TextStyle(fontSize: 12, color: Colors.black54),
                         ),
                       ],
@@ -276,7 +271,7 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
                       ),
                       decoration: InputDecoration(
                         hintText: 'Enter Rate',
-                        prefixText: '₹ ',
+                        prefixText: 'â‚¹ ',
                         prefixStyle: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -308,7 +303,6 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
                 ],
               ),
             ),
-            // Jewellery Type Dropdown
             const Text(
               "Jewellery Type",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -341,7 +335,6 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
             ),
             const SizedBox(height: 16),
 
-            // Gold Purity Row
             const Text(
               "Gold Purity",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -384,7 +377,6 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
             ),
             const SizedBox(height: 16),
 
-            // Weights (Gold, Stone) in a side-by-side Row
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -403,7 +395,7 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
                       TextFormField(
                         onTapOutside: (event) {
                           FocusManager.instance.primaryFocus
-                              ?.unfocus(); // Closes the keyboard
+                              ?.unfocus();
                         },
                         controller: _netController,
                         keyboardType: const TextInputType.numberWithOptions(
@@ -458,7 +450,7 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
                       TextFormField(
                         onTapOutside: (event) {
                           FocusManager.instance.primaryFocus
-                              ?.unfocus(); // Closes the keyboard
+                              ?.unfocus();
                         },
                         controller: _stoneController,
                         keyboardType: const TextInputType.numberWithOptions(
@@ -491,16 +483,15 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
             ),
             const SizedBox(height: 16),
 
-            // Stone Rate Full-Width TextFormField
             const Text(
-              "Stone Rate (₹/g)",
+              "Stone Rate (â‚¹/g)",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 6),
             TextFormField(
               onTapOutside: (event) {
                 FocusManager.instance.primaryFocus
-                    ?.unfocus(); // Closes the keyboard
+                    ?.unfocus();
               },
               controller: _stoneRateController,
               keyboardType: const TextInputType.numberWithOptions(
@@ -509,7 +500,7 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
               style: const TextStyle(fontSize: 18),
               decoration: InputDecoration(
                 hintText: '0.00',
-                prefixText: '₹ ',
+                prefixText: 'â‚¹ ',
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 12,
                   vertical: 12,
@@ -528,7 +519,6 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
             ),
             const SizedBox(height: 16),
 
-            // Wastage Charges Unit & Input
             const Text(
               "Wastage Charges Type",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -560,7 +550,7 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
             TextFormField(
               onTapOutside: (event) {
                 FocusManager.instance.primaryFocus
-                    ?.unfocus(); // Closes the keyboard
+                    ?.unfocus();
               },
               controller: _wastageController,
               keyboardType: const TextInputType.numberWithOptions(
@@ -598,7 +588,6 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
             ),
             const SizedBox(height: 16),
 
-            // Making Charges Type selection and value input
             const Text(
               "Making Charges Type",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -618,7 +607,7 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
                   ),
                   ButtonSegment<bool>(
                     value: true,
-                    label: Text('₹ Fixed Amount'),
+                    label: Text('â‚¹ Fixed Amount'),
                   ),
                 ],
                 selected: {_isMakingFixed},
@@ -633,7 +622,7 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
             TextFormField(
               onTapOutside: (event) {
                 FocusManager.instance.primaryFocus
-                    ?.unfocus(); // Closes the keyboard
+                    ?.unfocus();
               },
               controller: _makingChargeController,
               keyboardType: const TextInputType.numberWithOptions(
@@ -642,7 +631,7 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
               style: const TextStyle(fontSize: 18),
               decoration: InputDecoration(
                 hintText: '0.0',
-                prefixText: _isMakingFixed ? '₹ ' : null,
+                prefixText: _isMakingFixed ? 'â‚¹ ' : null,
                 suffixText: _isMakingFixed ? null : '%',
                 labelText: _isMakingFixed
                     ? 'Making Charge (Fixed Amount)'
@@ -672,7 +661,6 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
             ),
             const SizedBox(height: 16),
 
-            // GST Toggle and Quantity
             Row(
               children: [
                 Expanded(
@@ -732,7 +720,7 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
                             child: TextFormField(
                               onTapOutside: (event) {
                                 FocusManager.instance.primaryFocus
-                                    ?.unfocus(); // Closes the keyboard
+                                    ?.unfocus();
                               },
                               controller: _qtyController,
                               keyboardType: TextInputType.number,
@@ -775,7 +763,6 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
             ),
             const SizedBox(height: 24),
 
-            // Live preview section
             if (goldRate <= 0)
               Container(
                 width: double.infinity,
@@ -835,7 +822,7 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
                     ),
                     _buildPreviewRow(
                       "Gold Value:",
-                      "₹ ${NumberFormat.decimalPattern('en_IN').format(goldVal.round())}",
+                      "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(goldVal.round())}",
                     ),
                     if (stoneCost > 0) ...[
                       _buildPreviewRow(
@@ -844,26 +831,26 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
                       ),
                       _buildPreviewRow(
                         "Stone Cost:",
-                        "₹ ${NumberFormat.decimalPattern('en_IN').format(stoneCost.round())}",
+                        "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(stoneCost.round())}",
                       ),
                     ],
                     _buildPreviewRow(
                       "Wastage Amount:",
-                      "₹ ${NumberFormat.decimalPattern('en_IN').format(wastageAmt.round())}",
+                      "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(wastageAmt.round())}",
                     ),
                     _buildPreviewRow(
                       "Making Charges:",
-                      "₹ ${NumberFormat.decimalPattern('en_IN').format(makingAmt.round())}",
+                      "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(makingAmt.round())}",
                     ),
                     if (_enableGst)
                       _buildPreviewRow(
                         "GST (3%):",
-                        "₹ ${NumberFormat.decimalPattern('en_IN').format(gstAmt.round())}",
+                        "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(gstAmt.round())}",
                       ),
                     const Divider(height: 16, thickness: 1, color: Colors.grey),
                     _buildPreviewRow(
                       "Estimated Total:",
-                      "₹ ${NumberFormat.decimalPattern('en_IN').format(finalAmt.round())}",
+                      "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(finalAmt.round())}",
                       isTotal: true,
                     ),
                   ],
@@ -872,7 +859,6 @@ class _AddItemTabState extends ConsumerState<AddItemTab> {
 
             const SizedBox(height: 24),
 
-            // Submit and Clear buttons
             Row(
               children: [
                 Expanded(

@@ -24,20 +24,18 @@ class _HomePageState extends ConsumerState<HomePage> {
     ];
 
     return PopScope(
-      canPop: false, // Intercept all system back gestures
+      canPop: false,
       onPopInvokedWithResult: (bool didPop, Object? result) {
         if (didPop) return;
 
         final now = DateTime.now();
         
-        // Check if the back button was pressed within the last 5 seconds
         if (_lastPressedTime == null || 
             now.difference(_lastPressedTime!) > const Duration(seconds: 5)) {
           
-          // First press or timeout exceeded: update time and show Snackbar
           _lastPressedTime = now;
 
-          ScaffoldMessenger.of(context).clearSnackBars(); // Dismiss old snackbars instantly
+          ScaffoldMessenger.of(context).clearSnackBars();
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Press back again'),
@@ -45,7 +43,6 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
           );
         } else {
-          // Second press within 5 seconds: Exit the application
           SystemNavigator.pop();
         }
       },

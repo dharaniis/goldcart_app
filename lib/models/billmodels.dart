@@ -36,17 +36,17 @@ class EstimateResult {
 
 class JewelleryItem {
   final String id;
-  final String type; // e.g., Gold Coin, Ring, Chain, Bangle, etc.
+  final String type;
   final String purity;
-  final double goldRate; // 24K, 22K, 18K
+  final double goldRate;
   final double grossWeight;
   final double stoneWeight;
-  final double stoneRate; // Price per gram for stones
+  final double stoneRate;
   final double netWeight;
   final double wastageCharge;
   final bool isWastageInGrams;
   final double makingCharge;
-  final bool isMakingFixed; // true = fixed, false = percentage
+  final bool isMakingFixed;
   final bool enableGst;
   final int quantity;
 

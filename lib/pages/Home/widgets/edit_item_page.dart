@@ -18,16 +18,14 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
   final _formKey = GlobalKey<FormState>();
   final purityIndex = {'18K': 0, '22K': 1, '24K': 2};
 
-  // Form Field Controllers
-  late TextEditingController _netController; // Gold Weight (direct input)
-  late TextEditingController _stoneController; // Stone Weight (optional)
-  late TextEditingController _stoneRateController; // Stone Rate (optional)
+  late TextEditingController _netController;
+  late TextEditingController _stoneController;
+  late TextEditingController _stoneRateController;
   late TextEditingController _wastageController;
   late TextEditingController _makingChargeController;
   late TextEditingController _qtyController;
   late TextEditingController _rateController;
 
-  // Input states
   late String _selectedType;
   late String _selectedPurity;
   late bool _isWastageInGrams;
@@ -187,7 +185,6 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
     final goldRate = double.parse(rateList[selectedIndex]);
     _rateController.text = goldRate.toStringAsFixed(0);
 
-    // Compute live preview calculations
     final double net = double.tryParse(_netController.text) ?? 0.0;
     final double stone = double.tryParse(_stoneController.text) ?? 0.0;
     final double stoneRate = double.tryParse(_stoneRateController.text) ?? 0.0;
@@ -219,7 +216,6 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
             children: [
               Container(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-              //color: Colors.grey[100],
               child: Row(
                 children: [
                   Expanded(
@@ -236,7 +232,7 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
                           ),
                         ),
                         const Text(
-                          "Rate per gram (₹)",
+                          "Rate per gram (â‚¹)",
                           style: TextStyle(fontSize: 12, color: Colors.black54),
                         ),
                       ],
@@ -257,7 +253,7 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
                       ],
                       decoration: InputDecoration(
                         hintText: 'Enter Rate',
-                        prefixText: '₹ ',
+                        prefixText: 'â‚¹ ',
                         prefixStyle: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -287,7 +283,6 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
                 ],
               ),
             ),
-              // Jewellery Type Dropdown
               const Text("Jewellery Type", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
               const SizedBox(height: 6),
               DropdownButtonFormField<String>(
@@ -312,7 +307,6 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
               ),
               const SizedBox(height: 16),
 
-              // Gold Purity Row
               const Text("Gold Purity", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
               const SizedBox(height: 8),
               Row(
@@ -352,7 +346,6 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
               ),
               const SizedBox(height: 16),
 
-              // Weights (Gold, Stone) in a side-by-side Row
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -424,8 +417,7 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
               ),
               const SizedBox(height: 16),
 
-              // Stone Rate Full-Width TextFormField
-              const Text("Stone Rate (₹/g)", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+              const Text("Stone Rate (â‚¹/g)", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
               const SizedBox(height: 6),
               TextFormField(
                 controller: _stoneRateController,
@@ -433,7 +425,7 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
                 style: const TextStyle(fontSize: 18),
                 decoration: InputDecoration(
                   hintText: '0.00',
-                  prefixText: '₹ ',
+                  prefixText: 'â‚¹ ',
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
                 ),
@@ -447,7 +439,6 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
               ),
               const SizedBox(height: 16),
 
-              // Wastage Charges Unit & Input
               const Text("Wastage Charges Type", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
               const SizedBox(height: 8),
               SizedBox(
@@ -498,7 +489,6 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
               ),
               const SizedBox(height: 16),
 
-              // Making Charges Type selection and value input
               const Text("Making Charges Type", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
               const SizedBox(height: 8),
               SizedBox(
@@ -510,7 +500,7 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
                   ),
                   segments: const [
                     ButtonSegment<bool>(value: false, label: Text('% Percentage')),
-                    ButtonSegment<bool>(value: true, label: Text('₹ Fixed Amount')),
+                    ButtonSegment<bool>(value: true, label: Text('â‚¹ Fixed Amount')),
                   ],
                   selected: {_isMakingFixed},
                   onSelectionChanged: (value) {
@@ -527,7 +517,7 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
                 style: const TextStyle(fontSize: 18),
                 decoration: InputDecoration(
                   hintText: '0.0',
-                  prefixText: _isMakingFixed ? '₹ ' : null,
+                  prefixText: _isMakingFixed ? 'â‚¹ ' : null,
                   suffixText: _isMakingFixed ? null : '%',
                   labelText: _isMakingFixed ? 'Making Charge (Fixed Amount)' : 'Making Charge (Percentage of Gold Value)',
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
@@ -550,7 +540,6 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
               ),
               const SizedBox(height: 16),
 
-              // GST Toggle and Quantity
               Row(
                 children: [
                   Expanded(
@@ -622,7 +611,6 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
               ),
               const SizedBox(height: 24),
 
-              // Live preview section
               if (goldRate <= 0)
                 Container(
                   width: double.infinity,
@@ -667,17 +655,17 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
                       ),
                       const SizedBox(height: 8),
                       _buildPreviewRow("Gold Weight:", "${net.toStringAsFixed(3)} g"),
-                      _buildPreviewRow("Gold Value:", "₹ ${NumberFormat.decimalPattern('en_IN').format(goldVal.round())}"),
+                      _buildPreviewRow("Gold Value:", "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(goldVal.round())}"),
                       if (stoneCost > 0)
-                        _buildPreviewRow("Stone Cost:", "₹ ${NumberFormat.decimalPattern('en_IN').format(stoneCost.round())}"),
-                      _buildPreviewRow("Wastage Amount:", "₹ ${NumberFormat.decimalPattern('en_IN').format(wastageAmt.round())}"),
-                      _buildPreviewRow("Making Charges:", "₹ ${NumberFormat.decimalPattern('en_IN').format(makingAmt.round())}"),
+                        _buildPreviewRow("Stone Cost:", "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(stoneCost.round())}"),
+                      _buildPreviewRow("Wastage Amount:", "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(wastageAmt.round())}"),
+                      _buildPreviewRow("Making Charges:", "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(makingAmt.round())}"),
                       if (_enableGst)
-                        _buildPreviewRow("GST (3%):", "₹ ${NumberFormat.decimalPattern('en_IN').format(gstAmt.round())}"),
+                        _buildPreviewRow("GST (3%):", "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(gstAmt.round())}"),
                       const Divider(height: 16, thickness: 1, color: Colors.grey),
                       _buildPreviewRow(
                         "Estimated Total:",
-                        "₹ ${NumberFormat.decimalPattern('en_IN').format(finalAmt.round())}",
+                        "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(finalAmt.round())}",
                         isTotal: true,
                       ),
                     ],
@@ -686,7 +674,6 @@ class _EditItemPageState extends ConsumerState<EditItemPage> {
 
               const SizedBox(height: 24),
 
-              // Save and Cancel buttons
               Row(
                 children: [
                   Expanded(

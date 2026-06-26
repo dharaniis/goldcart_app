@@ -128,8 +128,8 @@ class _CartTabState extends ConsumerState<CartTab> {
           SizedBox(
             width: 150,
             child: FittedBox(
-              fit: BoxFit.scaleDown, // Shrinks text to fit boundaries
-              alignment: Alignment.centerRight, // Keeps text aligned properly
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerRight,
               child: Text(
                 value,
                 style: TextStyle(
@@ -184,7 +184,6 @@ class _CartTabState extends ConsumerState<CartTab> {
       );
     }
 
-    // Calculations for the complete estimate summary
     double totalGoldWeight = 0.0;
     double totalGoldVal = 0.0;
     double totalStoneCost = 0.0;
@@ -259,7 +258,6 @@ class _CartTabState extends ConsumerState<CartTab> {
         ),
         const SizedBox(height: 12),
 
-        // Multi-select mode indicator
         if (multiSelectMode)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
@@ -344,7 +342,6 @@ class _CartTabState extends ConsumerState<CartTab> {
 
         if (multiSelectMode) const SizedBox(height: 12),
 
-        // List of jewellery items
         ...items.map((item) {
           selectedIndex = purityIndex[item.purity] ?? 1;
           goldRate = double.parse(rateList[selectedIndex]);
@@ -395,7 +392,6 @@ class _CartTabState extends ConsumerState<CartTab> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Title and Edit/Delete Actions
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -458,7 +454,6 @@ class _CartTabState extends ConsumerState<CartTab> {
                     ),
                     const Divider(height: 16),
 
-                    // Item Details Grid/Rows
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -534,11 +529,11 @@ class _CartTabState extends ConsumerState<CartTab> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Gold Value (@ ₹ ${item.goldRate.toStringAsFixed(0)}/g) :",
+                          "Gold Value (@ â‚¹ ${item.goldRate.toStringAsFixed(0)}/g) :",
                           style: TextStyle(fontSize: 15, color: Colors.black54),
                         ),
                         Text(
-                          "₹ ${NumberFormat.decimalPattern('en_IN').format(itemGoldVal.round())}",
+                          "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(itemGoldVal.round())}",
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -552,14 +547,14 @@ class _CartTabState extends ConsumerState<CartTab> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Stone Cost (@ ₹ ${item.stoneRate.toStringAsFixed(0)}/g):",
+                            "Stone Cost (@ â‚¹ ${item.stoneRate.toStringAsFixed(0)}/g):",
                             style: const TextStyle(
                               fontSize: 15,
                               color: Colors.black54,
                             ),
                           ),
                           Text(
-                            "₹ ${NumberFormat.decimalPattern('en_IN').format(itemStoneCost.round())}",
+                            "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(itemStoneCost.round())}",
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -580,7 +575,7 @@ class _CartTabState extends ConsumerState<CartTab> {
                           ),
                         ),
                         Text(
-                          "₹ ${NumberFormat.decimalPattern('en_IN').format(itemWastage.round())}",
+                          "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(itemWastage.round())}",
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -600,7 +595,7 @@ class _CartTabState extends ConsumerState<CartTab> {
                           ),
                         ),
                         Text(
-                          "₹ ${NumberFormat.decimalPattern('en_IN').format(itemMaking.round())}",
+                          "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(itemMaking.round())}",
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -618,7 +613,7 @@ class _CartTabState extends ConsumerState<CartTab> {
                         ),
                         Text(
                           item.enableGst
-                              ? "₹ ${NumberFormat.decimalPattern('en_IN').format(itemFinal.round() - (itemGoldVal + itemStoneCost + itemWastage + itemMaking).round())}"
+                              ? "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(itemFinal.round() - (itemGoldVal + itemStoneCost + itemWastage + itemMaking).round())}"
                               : "Off",
                           style: const TextStyle(
                             fontSize: 16,
@@ -639,7 +634,7 @@ class _CartTabState extends ConsumerState<CartTab> {
                           ),
                         ),
                         Text(
-                          "₹ ${NumberFormat.decimalPattern('en_IN').format(itemFinal.round())}",
+                          "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(itemFinal.round())}",
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -659,7 +654,6 @@ class _CartTabState extends ConsumerState<CartTab> {
         const Divider(thickness: 2),
         const SizedBox(height: 10),
 
-        // FINAL ESTIMATE BILL CARD
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
@@ -700,31 +694,31 @@ class _CartTabState extends ConsumerState<CartTab> {
               ),
               _buildSummaryRow(
                 "Total Gold Value:",
-                "₹ ${NumberFormat.decimalPattern('en_IN').format(totalGoldVal.round())}",
+                "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(totalGoldVal.round())}",
               ),
               if (totalStoneCost > 0)
                 _buildSummaryRow(
                   "Total Stone Cost:",
-                  "₹ ${NumberFormat.decimalPattern('en_IN').format(totalStoneCost.round())}",
+                  "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(totalStoneCost.round())}",
                 ),
               _buildSummaryRow(
                 "Total Wastage Charges:",
-                "₹ ${NumberFormat.decimalPattern('en_IN').format(totalWastage.round())}",
+                "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(totalWastage.round())}",
               ),
               _buildSummaryRow(
                 "Total Making Charges:",
-                "₹ ${NumberFormat.decimalPattern('en_IN').format(totalMaking.round())}",
+                "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(totalMaking.round())}",
               ),
               _buildSummaryRow(
                 "Total GST (3%):",
-                "₹ ${NumberFormat.decimalPattern('en_IN').format(totalGst.round())}",
+                "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(totalGst.round())}",
               ),
 
               const Divider(height: 24, thickness: 2, color: Colors.black),
 
               _buildSummaryRow(
                 "GRAND TOTAL:",
-                "₹ ${NumberFormat.decimalPattern('en_IN').format(grandTotal.round())}",
+                "â‚¹ ${NumberFormat.decimalPattern('en_IN').format(grandTotal.round())}",
                 isTotal: true,
               ),
             ],
